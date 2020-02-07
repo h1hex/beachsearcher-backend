@@ -16,9 +16,12 @@ class BeachesTableSeeder extends Seeder
             'title' => 'Тестовый пляж',
             'lat' => 43.47,
             'lon' => -3.78,
-            'rating' => 4.5,
-            'location' => 'Расположен в центре города',
-            'specifications' => 'Best for kids',
+            'city_id' => 1
+        ]);
+        Beach::create([
+            'title' => 'Тестовый пляж 2',
+            'lat' => 43.47,
+            'lon' => -3.78,
             'city_id' => 1
         ]);
     }

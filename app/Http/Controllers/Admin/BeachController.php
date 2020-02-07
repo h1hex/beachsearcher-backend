@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Beach;
-use App\BeachMeta;
+use App\BeachParam;
+use App\BeachValue;
 use App\City;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -28,7 +29,6 @@ class BeachController extends Controller
         return view('admin.beaches.create', [
             'beach' => [],
             'cities' => City::all(),
-            'beach_metas' => [],
         ]);
     }
 
@@ -52,7 +52,7 @@ class BeachController extends Controller
         // Загрузка изображений
         $this->uploadImages($request->file('pictures'), $request->file('panoramas'), $beach, $poi_img);
 
-        $this->generateShortDescription($beach);
+//        $this->generateShortDescription($beach);
 
         return redirect()->route('admin.beaches.edit', $beach);
     }
@@ -79,7 +79,7 @@ class BeachController extends Controller
         return view('admin.beaches.edit', [
             'beach' => $beach,
             'cities' => City::all(),
-            'beach_metas' => $beach->metas()->get()
+            'params' => BeachParam::all(),
         ]);
     }
 
@@ -93,13 +93,20 @@ class BeachController extends Controller
     public function update(Request $request, Beach $beach)
     {
         // Проверка обновляем мета поля или нет
-        if (isset($request['update_metas']) && $request['update_metas'] === 'true') {
-            $data = $request->except('_method', '_token');
+        if (isset($request['update_params']) && $request['update_params'] === 'true') {
+            $data = $request->except('_method', '_token', 'update_params');
             foreach ($data as $key => $value) {
-                $beach_meta = BeachMeta::where('beach_id', $beach->id)->where('key', $key)->first();
-                if (isset($beach_meta)) {
-                    $beach_meta->update([
-                        'value' => $value
+                $param = BeachParam::where('name', $key)->first();
+                if ($beach_value = BeachValue::where('beach_id', $beach->id)->where('param_id', $param->id)->first()) {
+                    $beach_value->update([
+                        $param->type => $value
+                    ]);
+                }
+                else {
+                    $beach_value = BeachValue::create([
+                        'beach_id' => $beach->id,
+                        'param_id' => $param->id,
+                        $param->type => $value
                     ]);
                 }
             }
@@ -117,7 +124,7 @@ class BeachController extends Controller
             // Загрузка изображений
             $this->uploadImages($request->file('pictures'), $request->file('panoramas'), $beach, $poi_img);
 
-            $this->generateShortDescription($beach);
+//            $this->generateShortDescription($beach);
         }
 
         return redirect()->route('admin.beaches.edit', $beach);

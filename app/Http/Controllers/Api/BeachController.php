@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Beach;
+use App\BeachParam;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -28,12 +29,11 @@ class BeachController extends Controller
             return json_encode($data);
         }
         else {
-            $error = [
-                'code' => 400,
-                'message' => 'Required parameters not specified'
-            ];
+            $beaches = Beach::all();
+            $params = BeachParam::all();
+            $data = [$beaches, $params];
 
-            return json_encode($error);
+            return json_encode($data);
         }
     }
 
