@@ -45,6 +45,9 @@
                         <li class="nav-item">
                             <a href="{{route('admin.cities.index')}}" class="nav-link">Города</a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{route('admin.users.index')}}" class="nav-link">Пользователи</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
