@@ -27,4 +27,5 @@ Route::group([
     Route::get('/', 'DashboardController@index')->name('admin.index');
     Route::resource('/beaches', 'BeachController', ['as' => 'admin']);
     Route::resource('/cities', 'CityController', ['as' => 'admin']);
+    Route::resource('/users', 'UserController', ['as' => 'admin']);
 });

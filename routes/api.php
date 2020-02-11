@@ -20,3 +20,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::apiResource('weather', 'Api\WeatherController');
 Route::apiResource('beach', 'Api\BeachController');
+Route::apiResource('user', 'Api\UserController');
