@@ -15,14 +15,14 @@ class CreateBeachesTable extends Migration
     {
         Schema::create('beaches', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title');
+            $table->text('title');
             $table->double('lat');
             $table->double('lon');
             $table->text('pictures')->nullable();
             $table->text('panoramas')->nullable();
             $table->text('short_description')->nullable();
             $table->integer('city_id')->nullable();
-            $table->string('poi_img')->nullable();
+            $table->text('poi_img')->nullable();
             $table->tinyInteger('status')->default(10);
             $table->integer('created_by')->nullable();
             $table->integer('modified_by')->nullable();
