@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class BeachValue extends Model
 {
     protected $fillable = [
-        'beach_id', 'param_id', 'int', 'date', 'boolean', 'string', 'point', 'double'
+        'beach_id', 'param_id', 'catalog_id', 'int', 'date', 'boolean', 'string', 'point', 'double'
     ];
 
     public function param() {

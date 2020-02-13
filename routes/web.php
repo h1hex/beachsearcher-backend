@@ -28,4 +28,5 @@ Route::group([
     Route::resource('/beaches', 'BeachController', ['as' => 'admin']);
     Route::resource('/cities', 'CityController', ['as' => 'admin']);
     Route::resource('/users', 'UserController', ['as' => 'admin']);
+    Route::resource('/catalogs', 'CatalogController', ['as' => 'admin']);
 });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Beach;
 use App\BeachParam;
 use App\BeachValue;
+use App\Catalog;
 use App\City;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -80,6 +81,7 @@ class BeachController extends Controller
             'beach' => $beach,
             'cities' => City::all(),
             'params' => BeachParam::all(),
+            'catalogs' => Catalog::where('parent_id', null)->get()
         ]);
     }
 
@@ -107,6 +109,24 @@ class BeachController extends Controller
                         'beach_id' => $beach->id,
                         'param_id' => $param->id,
                         $param->type => $value
+                    ]);
+                }
+            }
+        }
+        else if ($request['update_catalogs']) {
+            $data = $request->except(['_method', '_token', 'update_catalogs']);
+            foreach ($data as $key => $value) {
+                $catalog_id = Catalog::where('name', $key)->where('parent_id', null)->first()->id;
+                if ($beach_value = BeachValue::where('catalog_id', $catalog_id)->where('beach_id', $beach->id)->first()) {
+                    $beach_value->update([
+                        'int' => $value,
+                    ]);
+                }
+                else {
+                    BeachValue::create([
+                        'beach_id' => $beach->id,
+                        'catalog_id' => $catalog_id,
+                        'int' => $value
                     ]);
                 }
             }

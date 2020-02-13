@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBeachParamsTable extends Migration
+class CreateCatalogsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateBeachParamsTable extends Migration
      */
     public function up()
     {
-        Schema::create('beach_params', function (Blueprint $table) {
+        Schema::create('catalogs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('type');
+            $table->integer('parent_id')->nullable();
             $table->text('name');
-            $table->text('label');
-            $table->text('label_type');
+            $table->text('label')->nullable();
+            $table->text('value')->nullable();
             $table->integer('created_by')->nullable();
             $table->integer('modified_by')->nullable();
             $table->timestamps();
@@ -32,6 +32,6 @@ class CreateBeachParamsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('beach_params');
+        Schema::dropIfExists('catalogs');
     }
 }

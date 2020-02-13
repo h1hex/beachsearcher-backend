@@ -31,6 +31,16 @@
             <input type="hidden" name="update_params" value="true">
         </form>
 
+        <form action="{{route('admin.beaches.update', $beach)}}" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="_method" value="put">
+            {{csrf_field()}}
+
+            {{-- Form include --}}
+            @include('admin.beaches.partials.catalogs')
+
+            <input type="hidden" name="update_catalogs" value="true">
+        </form>
+
     </div>
 
 @endsection

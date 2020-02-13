@@ -26,7 +26,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ route('admin.index') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -37,16 +37,19 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a href="{{route('admin.index')}}" class="nav-link">Главная</a>
+                            <a href="{{route('admin.index')}}" class="nav-link">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('admin.beaches.index')}}" class="nav-link">Пляжи</a>
+                            <a href="{{route('admin.beaches.index')}}" class="nav-link">Beaches</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('admin.cities.index')}}" class="nav-link">Города</a>
+                            <a href="{{route('admin.cities.index')}}" class="nav-link">Cities</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{route('admin.users.index')}}" class="nav-link">Пользователи</a>
+                            <a href="{{route('admin.users.index')}}" class="nav-link">Users</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('admin.catalogs.index')}}" class="nav-link">Catalog</a>
                         </li>
                     </ul>
 

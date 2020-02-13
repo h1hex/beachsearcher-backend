@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
          $this->call(BeachesTableSeeder::class);
          $this->call(BeachParamsTableSeeder::class);
          $this->call(BeachValuesTableSeeder::class);
+         $this->call(CatalogsTableSeeder::class);
     }
 }

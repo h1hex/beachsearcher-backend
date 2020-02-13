@@ -16,13 +16,13 @@ class CreateBeachValuesTable extends Migration
         Schema::create('beach_values', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('beach_id');
-            $table->integer('param_id');
+            $table->integer('param_id')->nullable();
+            $table->integer('catalog_id')->nullable();
             $table->integer('int')->nullable();
             $table->double('double')->nullable();
             $table->timestamp('date')->nullable();
             $table->boolean('boolean')->nullable();
             $table->text('string')->nullable();
-            $table->point('point')->nullable();
             $table->timestamps();
         });
     }
