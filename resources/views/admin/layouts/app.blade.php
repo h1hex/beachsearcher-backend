@@ -51,6 +51,9 @@
                         <li class="nav-item">
                             <a href="{{route('admin.catalogs.index')}}" class="nav-link">Catalog</a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{route('admin.reviews.index')}}" class="nav-link">Reviews</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

@@ -17,6 +17,51 @@
                     You are logged in!
                 </div>
             </div>
+
+            <div class="card mt-4">
+                <div class="card-header">Testing add reviews</div>
+                <div class="card-body">
+                    <form action="{{route('home.add.review')}}" method="post">
+                        {{csrf_field()}}
+
+                        <label for="">Beach</label>
+                        <select class="form-control mb-3" name="beach_id" id="" required>
+                            @foreach($beaches as $beach)
+                                <option value="{{$beach->id}}">{{$beach->title}}</option>
+                            @endforeach
+                        </select>
+
+                        <label for="">Rating</label>
+                        <select class="form-control mb-3" name="rating" id="" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+
+                        <textarea class="form-control mb-3" name="text" id="" cols="30" rows="10" placeholder="Your review" required>
+                        </textarea>
+
+                        <button type="submit" class="btn btn-primary">Add review</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card mt-4">
+                <div class="card-header">Your reviews</div>
+                <div class="card-body">
+                    @forelse($reviews as $review)
+                        <div class="jumbotron">
+                            Rating: {{$review->rating}}
+                            <br>
+                            {{$review->text}}
+                        </div>
+                    @empty
+                        No data
+                    @endforelse
+                </div>
+            </div>
         </div>
     </div>
 </div>
