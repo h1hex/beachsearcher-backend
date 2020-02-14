@@ -18,6 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/reviews/add', 'HomeController@addReview')->name('home.add.review');
 
 Route::group([
     'prefix' => 'admin',
@@ -29,4 +30,5 @@ Route::group([
     Route::resource('/cities', 'CityController', ['as' => 'admin']);
     Route::resource('/users', 'UserController', ['as' => 'admin']);
     Route::resource('/catalogs', 'CatalogController', ['as' => 'admin']);
+    Route::resource('/reviews', 'ReviewController', ['as' => 'admin']);
 });
