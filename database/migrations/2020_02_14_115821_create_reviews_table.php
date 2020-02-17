@@ -17,8 +17,12 @@ class CreateReviewsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('beach_id');
             $table->integer('user_id');
-            $table->float('rating');
+            $table->integer('reply_to')->nullable();
+            // Тип: отзыв, вопрос или история
+            $table->smallInteger('type')->default(1);
+            $table->float('rating')->nullable();
             $table->text('text');
+            $table->integer('likes')->nullable();
             $table->tinyInteger('status')->default(10);
             $table->timestamps();
         });

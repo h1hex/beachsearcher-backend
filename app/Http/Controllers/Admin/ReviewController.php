@@ -7,6 +7,7 @@ use App\Review;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {
@@ -18,7 +19,7 @@ class ReviewController extends Controller
     public function index()
     {
         return view('admin.reviews.index', [
-            'reviews' => Review::orderBy('id', 'desc')->paginate(10),
+            'reviews' => Review::orderBy('id', 'desc')->where('reply_to', null)->paginate(10),
         ]);
     }
 
@@ -40,7 +41,20 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($request['store_reply']) {
+            $review = Review::create([
+                'reply_to' => $request['reply_to'],
+                'beach_id' => $request['beach_id'],
+                'user_id' => Auth::id(),
+                'status' => 10,
+                'text' => $request['text'],
+                'type' => 4
+            ]);
+
+            $reply_to = Review::where('id', $request['reply_to'])->first();
+            return redirect()->route('admin.reviews.edit', $reply_to);
+        }
+        return redirect()->route('admin.reviews.index');
     }
 
     /**
@@ -66,6 +80,7 @@ class ReviewController extends Controller
             'review' => $review,
             'beach' => Beach::where('id', $review->beach_id)->first(),
             'user' => User::where('id', $review->user_id)->first(),
+            'answers' => Review::where('reply_to', $review->id)->get()
         ]);
     }
 
