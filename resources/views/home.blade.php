@@ -49,6 +49,50 @@
             </div>
 
             <div class="card mt-4">
+                <div class="card-header">Testing add question</div>
+                <div class="card-body">
+                    <form action="{{route('home.add.review')}}" method="post">
+                        {{csrf_field()}}
+                        <input type="hidden" name="type" value="2">
+
+                        <label for="">Beach</label>
+                        <select class="form-control mb-3" name="beach_id" id="" required>
+                            @foreach($beaches as $beach)
+                                <option value="{{$beach->id}}">{{$beach->title}}</option>
+                            @endforeach
+                        </select>
+
+                        <textarea class="form-control mb-3" name="text" id="" cols="30" rows="10" placeholder="Your question" required>
+                        </textarea>
+
+                        <button type="submit" class="btn btn-primary">Add question</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card mt-4">
+                <div class="card-header">Testing add story</div>
+                <div class="card-body">
+                    <form action="{{route('home.add.review')}}" method="post">
+                        {{csrf_field()}}
+                        <input type="hidden" name="type" value="3">
+
+                        <label for="">Beach</label>
+                        <select class="form-control mb-3" name="beach_id" id="" required>
+                            @foreach($beaches as $beach)
+                                <option value="{{$beach->id}}">{{$beach->title}}</option>
+                            @endforeach
+                        </select>
+
+                        <textarea class="form-control mb-3" name="text" id="" cols="30" rows="10" placeholder="Your story" required>
+                        </textarea>
+
+                        <button type="submit" class="btn btn-primary">Add story</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card mt-4">
                 <div class="card-header">Your reviews</div>
                 <div class="card-body">
                     @forelse($reviews as $review)

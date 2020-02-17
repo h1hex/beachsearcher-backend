@@ -21,6 +21,26 @@
             <input type="hidden" name="modified_by" value="{{Auth::id()}}">
         </form>
 
+        @if($review->type === 2)
+            <form action="{{route('admin.reviews.store')}}" method="post" enctype="multipart/form-data">
+                {{csrf_field()}}
+
+                {{-- Form include --}}
+                @include('admin.reviews.partials.reply')
+
+                <input type="hidden" name="reply_to" value="{{$review->id}}">
+                <input type="hidden" name="beach_id" value="{{$review->beach_id}}">
+                <input type="hidden" name="store_reply" value="true">
+                <input type="hidden" name="modified_by" value="{{Auth::id()}}">
+            </form>
+            @forelse($answers as $answer)
+                <div class="jumbotron">
+                    {{$answer->text}}
+                </div>
+            @empty
+            @endforelse
+        @endif
+
     </div>
 
 @endsection

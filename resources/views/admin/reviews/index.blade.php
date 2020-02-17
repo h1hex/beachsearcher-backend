@@ -14,6 +14,7 @@
             <thead>
             <tr>
                 <th>ID</th>
+                <td>Type</td>
                 <td>Status</td>
                 <th class="text-right">Action</th>
             </tr>
@@ -22,6 +23,15 @@
             @forelse($reviews as $review)
                 <tr>
                     <td>{{$review->id}}</td>
+                    <td>
+                        @if($review->type == 1)
+                            <span class="text-primary font-weight-bold">Review</span>
+                        @elseif($review->type == 2)
+                            <span class="text-danger font-weight-bold">Question</span>
+                        @elseif($review->type == 3)
+                            <span class="text-dark font-weight-bold">Story</span>
+                        @endif
+                    </td>
                     <td>
                         @if($review->status == 10)
                             <span class="text-primary font-weight-bold">Published</span>
@@ -45,7 +55,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="3" class="text-center">
+                    <td colspan="4" class="text-center">
                         <h2>No data</h2>
                     </td>
                 </tr>
@@ -53,7 +63,7 @@
             </tbody>
             <tfoot>
             <tr>
-                <td colspan="3">
+                <td colspan="4">
                     <ul class="pagination pull-right">
                         {{$reviews->links()}}
                     </ul>
